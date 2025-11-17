@@ -12,23 +12,24 @@
 
   <style>
     :root {
-      --primary: #1a73e8;
-      --primary-dark: #1557b0;
-      --accent: #ff6b6b;
-      --gray-100: #f8f9fa;
-      --gray-200: #e9ecef;
-      --gray-700: #495057;
-      --gray-900: #212529;
-      --success: #0d6efd;
-      --disabled: #adb5bd;
-      --disabled-bg: #e9ecef;
+      --primary: #6B11E0;      /* Deep purple */
+      --primary-dark: #4C0BA3;
+      --accent: #00D4FF;       /* Electric cyan */
+      --gold: #FBBF24;         /* Gold accent */
+      --gray-100: #f8fafc;
+      --gray-200: #1e1b2e;
+      --gray-700: #cbd5e1;
+      --gray-900: #ffffff;
+      --success: #00D4FF;
+      --disabled: #64748b;
+      --disabled-bg: #334155;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: var(--gray-900);
+      background: linear-gradient(135deg, #0f0727 0%, #1a0b3b 100%);
+      color: #e2e8f0;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -45,27 +46,28 @@
     }
     .particle {
       position: absolute;
-      background: rgba(255,255,255,0.1);
+      background: rgba(0, 212, 255, 0.15);
       border-radius: 50%;
-      animation: float 6s infinite ease-in-out;
+      animation: float 8s infinite ease-in-out;
     }
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-      50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+      50% { transform: translateY(-30px) rotate(180deg); opacity: 0.7; }
     }
 
     .card {
       position: relative;
       z-index: 1;
-      background: #fff;
+      background: #12121e;
       max-width: 480px;
       width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.15);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
       overflow: hidden;
+      border: 1px solid rgba(107, 17, 224, 0.3);
       transform: translateY(20px);
       opacity: 0;
-      animation: cardAppear 0.8s ease-out forwards;
+      animation: cardAppear 0.9s ease-out forwards;
     }
     @keyframes cardAppear {
       to { transform: translateY(0); opacity: 1; }
@@ -74,7 +76,7 @@
     .header {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: #fff;
-      padding: 32px 24px;
+      padding: 40px 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -84,90 +86,80 @@
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-      animation: pulse 4s infinite;
+      background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+      animation: pulse 5s infinite;
     }
     @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.2); opacity: 0.8; }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
     }
     .header h1 {
-      font-size: 2rem;
+      font-size: 2.4rem;
       font-weight: 700;
       margin: 0;
       position: relative;
       z-index: 1;
+      text-shadow: 0 4px 10px rgba(0,0,0,.3);
     }
     .header p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       opacity: .95;
-      margin-top: 6px;
+      margin-top: 8px;
       position: relative;
       z-index: 1;
     }
 
-    .body {
-      padding: 32px 28px;
-    }
+    .body { padding: 36px 28px; }
+
     .spots {
-      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-      color: #d35400;
-      font-weight: 600;
-      padding: 8px 16px;
+      background: linear-gradient(135deg, #78350f, var(--gold));
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 20px;
       border-radius: 50px;
       display: inline-block;
-      font-size: .9rem;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(255,193,7,.2);
+      font-size: .95rem;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, .4);
       animation: bounce 2s infinite;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-8px); }
     }
 
     .terms {
-      background: var(--gray-100);
-      border-left: 5px solid var(--primary);
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 28px;
-      font-size: .96rem;
-      line-height: 1.6;
-      position: relative;
-      overflow: hidden;
+      background: rgba(30, 27, 46, 0.6);
+      border-left: 5px solid var(--accent);
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 32px;
+      font-size: .98rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      backdrop-filter: blur(10px);
     }
-    .terms::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
-      transform: translateX(-100%);
-      animation: shimmer 3s infinite;
+    .terms strong {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 1.1rem;
     }
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-    .terms strong { display:block; margin-bottom:10px; font-weight:600; }
 
     .checkbox {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 32px;
+      gap: 14px;
+      margin-bottom: 36px;
       font-size: 1rem;
       cursor: pointer;
+      color: #e2e8f0;
     }
     .checkbox input[type="checkbox"] {
       margin-top: 3px;
-      accent-color: var(--primary);
-      transform: scale(1.2);
-      transition: transform .2s;
-    }
-    .checkbox:hover input[type="checkbox"] {
-      transform: scale(1.4);
+      accent-color: var(--accent);
+      transform: scale(1.3);
     }
 
     .btn {
@@ -175,56 +167,40 @@
       color: var(--disabled);
       border: none;
       width: 100%;
-      padding: 16px;
-      font-size: 1.1rem;
+      padding: 18px;
+      font-size: 1.15rem;
       font-weight: 600;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: not-allowed;
-      transition: all .3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,.1);
+      transition: all .4s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
     }
     .btn.enabled {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: #fff;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(26,115,232,.3);
+      box-shadow: 0 8px 30px rgba(107, 17, 224, .5);
     }
     .btn.enabled:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(26,115,232,.4);
-    }
-    .btn.enabled::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 0; height: 0;
-      background: rgba(255,255,255,.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width .4s, height .4s;
-    }
-    .btn.enabled:active::before {
-      width: 300px; height: 300px;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 212, 255, .4);
     }
 
     .footer {
       text-align: center;
-      font-size: .85rem;
-      color: var(--gray-700);
-      margin-top: 28px;
+      font-size: .9rem;
+      color: #94a3b8;
+      margin-top: 32px;
       opacity: 0;
-      animation: fadeIn 1s ease-out 1.2s forwards;
+      animation: fadeIn 1s ease-out 1.4s forwards;
     }
     @keyframes fadeIn {
       to { opacity: 1; }
     }
 
     @media (max-width: 480px) {
-      .card { border-radius: 16px; }
-      .header h1 { font-size: 1.7rem; }
-      .body { padding: 24px 20px; }
+      .header h1 { font-size: 2rem; }
+      .body { padding: 28px 20px; }
     }
   </style>
 </head>
@@ -233,26 +209,28 @@
   <!-- Floating Particles -->
   <div class="bg-particles" id="particles"></div>
 
-  <div class="card" data-aos="fade-up" data-aos-duration="800">
+  <div class="card" data-aos="fade-up" data-aos-duration="900">
     <div class="header">
       <h1>🎤 Melodia Club</h1>
-      <p>Exclusive Music Night – November 2025</p>
+      <p>Exclusive Music Club – November 2025</p>
     </div>
 
     <div class="body">
-      <div class="spots" data-aos="zoom-in" data-aos-delay="300">Only 16 spots available</div>
+      <div class="spots" data-aos="zoom-in" data-aos-delay="300">
+        Only 16 spots left – Registration now for free!
+      </div>
 
       <div class="terms" data-aos="fade-up" data-aos-delay="500">
         <strong>Terms & Conditions</strong>
-        • I confirm I will participate<br>
+        • I confirm I will attend the event<br>
         • Arrive 30 minutes early<br>
-        • Follow club rules<br>
-        • No changes after registration
+        • Follow all club rules <br>
+        • No changes after the registration
       </div>
 
       <label class="checkbox" data-aos="fade-up" data-aos-delay="700">
         <input type="checkbox" id="agree" onchange="toggleButton()">
-        <span>I accept to participate and agree to the Terms & Conditions</span>
+        <span>I accept to participate and agree to all Terms & Conditions</span>
       </label>
 
       <button id="proceedBtn" class="btn" onclick="proceed()" data-aos="fade-up" data-aos-delay="900" disabled>
@@ -263,26 +241,25 @@
     <div class="footer">© 2025 Melodia Club – All Rights Reserved</div>
   </div>
 
-  <!-- AOS Animation Script -->
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS
     AOS.init({ once: true });
 
-    // Generate floating particles
+    // Floating particles
     const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 15; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
-      p.style.width = p.style.height = Math.random() * 20 + 10 + 'px';
+      p.style.width = p.style.height = Math.random() * 25 + 10 + 'px';
       p.style.left = Math.random() * 100 + '%';
       p.style.top = Math.random() * 100 + '%';
-      p.style.animationDelay = Math.random() * 5 + 's';
-      p.style.animationDuration = (Math.random() * 4 + 4) + 's';
+      p.style.animationDelay = Math.random() * 6 + 's';
+      p.style.animationDuration = (Math.random() * 6 + 6) + 's';
       particlesContainer.appendChild(p);
     }
 
-    // Toggle button state
+    // Button toggle
     function toggleButton() {
       const checkbox = document.getElementById('agree');
       const btn = document.getElementById('proceedBtn');
@@ -295,10 +272,10 @@
       }
     }
 
-    // Proceed function - NOW USING YOUR GOOGLE FORM LINK
+    // Redirect to your Google Form
     function proceed() {
       if (!document.getElementById('agree').checked) {
-        alert('Please accept the Terms & Conditions to continue.');
+        alert('Please accept the Terms & Conditions first.');
         return;
       }
       const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdCbhLJXx3gcqn1jfJ8NwDjYR-YEc34odxLuG2RjsE1iO5hjA/viewform?usp=header';
