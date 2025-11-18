@@ -59,11 +59,6 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
       border: 1px solid rgba(107, 17, 224, 0.3);
       overflow: hidden;
-      animation: cardAppear 0.9s ease-out forwards;
-    }
-    @keyframes cardAppear {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
     }
 
     /* Header */
@@ -184,6 +179,7 @@
     }
     .btn.soldout {
       background: #dc2626;
+      color: white;
       cursor: not-allowed;
     }
 
@@ -192,6 +188,7 @@
       color: #94a3b8;
       font-size: 0.9rem;
       margin-top: 32px;
+      padding: 20px;
     }
 
     @media (max-width: 480px) {
@@ -241,32 +238,83 @@
   <script>
     AOS.init({ once: true });
 
-    // CHANGE THESE 2 LINES ONLY
-    const SHEET_ID = "1t-NVorYsmjMfwAiNAkPxC5VaC8-rVIb0TIN7ulwK6aykuMjwS9pJLro7"; // Your Sheet ID
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1Ck9vf981UWBr93xuv4uCz4QVUAUlLBD8bWGMkE3vYKbOYv50e2L3myaEjURn2acrog/exec"; // From Apps Script
-
+    // CHANGE ONLY THESE IF NEEDED
+    const SHEET_ID = "1t-NVorYsmjMfwAiNAkPxC5VaC8-rVIb0TIN7ulwK6aykuMjwS9pJLro7";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzRHxjk63qO1IWQ6PJRnBKbT7sIe3FokTm1Rk4YO5n1OncQwjDRYWyXPz6A-361E-qeVA/exec";
     const TOTAL_SLOTS = 16;
     const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdCbhLJXx3gcqn1jfJ8NwDjYR-YEc34odxLuG2RjsE1iO5hjA/viewform";
 
-    // Live Counter Update
+    // Live Counter
     function updateSlots() {
       fetch(`${WEB_APP_URL}?id=${SHEET_ID}`)
-        .then(response => response.json())
+        .then(r => r.json())
         .then(data => {
           let remaining = TOTAL_SLOTS - data.submissions;
           if (remaining < 0) remaining = 0;
 
           document.getElementById("count").textContent = remaining;
+
           const badge = document.getElementById("spotsBadge");
           const btn = document.getElementById("proceedBtn");
 
           if (remaining === 0) {
-             badge.innerHTML = "registration Closed";
-            badge.classList.add("registration-closed");
+            badge.innerHTML = "Registration Closed";
+            badge.classList.add("soldout");
+            btn.textContent = "Registration Closed";
+            btn.classList.add("soldout");
+            btn.disabled = true;
+          } else {
+            badge.innerHTML = `Only <strong>${remaining}</strong> slots left – Register now!`;
+            btn.classList.remove("soldout");
+          }
+        })
+        .catch(err => {
+          console.error("Counter error:", err);
+          document.getElementById("count").textContent = "??";
+        });
+    }
 
-  badge.innerHTML = "Registration Closed";
-  badge.classList.add("soldout");
-  btn.textContent = "Registration Closed";
-  btn.classList.add("soldout");
-  btn.disabled = true;
-}
+    // Enable button when checkbox is checked
+    function toggleBtn() {
+      const checkbox = document.getElementById("agree");
+      const btn = document.getElementById("proceedBtn");
+      if (checkbox.checked && !btn.classList.contains("soldout")) {
+        btn.classList.add("enabled");
+        btn.disabled = false;
+      } else {
+        btn.classList.remove("enabled");
+        btn.disabled = true;
+      }
+    }
+
+    // Redirect to Google Form
+    function goToForm() {
+      if (document.getElementById("proceedBtn").classList.contains("enabled")) {
+        window.open(FORM_URL, "_blank");
+      }
+    }
+
+    // Floating particles effect
+    function createParticles() {
+      const container = document.getElementById("particles");
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        p.style.width = p.style.height = Math.random() * 12 + 5 + "px";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        p.style.animationDelay = Math.random() * 8 + "s";
+        p.style.animationDuration = (Math.random() * 10 + 10) + "s";
+        container.appendChild(p);
+      }
+    }
+
+    // Run on load
+    window.onload = () => {
+      createParticles();
+      updateSlots();
+      setInterval(updateSlots, 8000); // Refresh every 8 seconds
+    };
+  </script>
+</body>
+</html>
